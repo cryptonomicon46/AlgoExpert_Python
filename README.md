@@ -1,2 +1,2 @@
 # BinarySearchTree
-Python code for BST interview questions
+Python code for BST related interview questions
