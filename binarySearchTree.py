@@ -56,30 +56,7 @@ class BST():
         
         return self
 
-#inorder =[1,2,5,5,10,13,14,15,22]
-def inOrderTraverse(tree, array):
-    # Write your code here.
-    if tree is None:
-        return
-    inOrderTraverse(tree.left,array)
-    array.append(tree.value)
-    print(tree.value,end=" ")
-    inOrderTraverse(tree.right,array)
-    
 
-#preorder=[10,5,2,1,5,15,13,14,22]
-
-def preOrderTraverse(tree, array):
-    # Write your code here.
-    pass
-
-#postorder=[1,2,5,5,14,13,22,15,10]
-def postOrderTraverse(tree, array):
-    # Write your code here.
-    pass
-
-
-    
             
 
     def findMinValue(self):
@@ -104,6 +81,36 @@ def postOrderTraverse(tree, array):
                 self.right.contains(value)
         else:
             return True
+
+
+
+def inOrderTraverse(tree, array):
+    # Write your code here.
+    if tree is None:
+        return
+    inOrderTraverse(tree.left,array)
+    array.append(tree.value)
+    print(tree.value,end=" ")
+    inOrderTraverse(tree.right,array)
+    
+
+def preOrderTraverse(tree, array):
+    # Write your code here.
+    if tree is None:
+        return
+    array.append(tree.value)
+    print(tree.value,end=" ")
+    preOrderTraverse(tree.left,array)
+    preOrderTraverse(tree.right,array)
+
+def postOrderTraverse(tree, array):
+    # Write your code here.
+    if tree is None:
+        return
+    postOrderTraverse(tree.left,array)
+    postOrderTraverse(tree.right,array)
+    array.append(tree.value)
+    print(tree.value,end=" ")
 
 
 # @classmethod:
@@ -136,74 +143,22 @@ def validateBST(tree):
 
 
 if __name__ == "__main__":
-    # node0 = TreeNode(3)
-    # node1 = TreeNode(4)
-    # node2 = TreeNode(5)
 
-    # node0.left = node1
-    # node0.right = node2
-    # tree = node0
-    
-    # tree2 = parse_tuple(((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8))))
-    # bst_parse_iter([10,5,1,7,40,50])
-   
+    b1 = BST(10)
+    b1.insert(5)
+    b1.insert(15)
+    b1.insert(13)
+    b1.insert(22)
+    b1.insert(12)
+    b1.insert(14)
+    b1.insert(2)
+    b1.insert(1)
 
+    # self.assertTrue(b1.contains(1))
+    # self.assertTrue(b1.contains(14))
 
-    # b1 = BST(10)
-    # b1.insert(5)
-    # b1.insert(15)
-    # b1.insert(13)
-    # b1.insert(22)
-    # b1.insert(12)
-    # b1.insert(14)
-    # b1.insert(2)
-    # b1.insert(1)
-
-
-    # print(b1.contains(12))
-
-
-    # b1.remove(10)
-   
-    # b2 = BST(10)
-    # b2.insert(5)
-    # b2.remove(10)
-
-    # b3 = BST(10)
-    # b3.insert(15)
-    # b3.remove(10)
-
-
-    root1 = BST(10)
-    root1.left = BST(5)
-    root1.left.left = BST(2)
-    root1.left.left.left = BST(1)
-    root1.left.right = BST(5)
-    root1.right = BST(15)
-    root1.right.left = BST(13)
-    root1.right.left.right = BST(14)
-    root1.right.right = BST(22)
-
-    # print(validateBST(root1))
-    
-
-    root2 = BST(10)
-    root2.left = BST(5)
-    root2.left.left = BST(2)
-    root2.left.left.left = BST(1)
-    root2.left.right = BST(5)
-    root2.right = BST(15)
-    root2.right.left = BST(13)
-    root2.right.left.right = BST(14)
-    root2.right.right = BST(11)
-
-
-    print(validateBST(root2))
-    b1 = arr.array("i",[])
-    inOrderTraverse(root1,b1)
-
-    print("\n")
-   
+    # b1.remove(22)
+    # self.assertFalse(b1.contains(22))
 
 
 #      10
