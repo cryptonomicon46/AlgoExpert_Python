@@ -1,45 +1,4 @@
 import array as arr
-class TreeNode():
-    def __init__(self,key):
-        self.key = key
-        self.left = None
-        self.right = None
-
-
-    def __str__(self):
-        return f"This is a node {self.key} with leaves {self.left} and {self.right}"
-
-def parse_tuple(data):
-    # print(data)
-    if isinstance(data, tuple) and len(data) == 3:
-        node = TreeNode(data[1])
-        node.left = parse_tuple(data[0])
-        node.right = parse_tuple(data[2])
-    elif data is None:
-        node = None
-    else:
-        node = TreeNode(data)
-    return node
-
-    #BST Preordered list parse 
-
-def bst_parse_iter(in_list):
-    node = TreeNode(in_list[0])
-    position=1
-    
-    while position <= len(in_list[:]):
-        next_value = in_list[position]
-        if next_value>node.key:
-            node.left = bst_parse_iter(in_list[1:position])
-            node.right = bst_parse_iter(in_list[position :])
-            return node
-            break
-        # elif node is None:
-        #     node = None
-        # else:
-        #     node = TreeNode(in_list[position])
-        position+=1
-
 
 
 class BST():
