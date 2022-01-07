@@ -15,11 +15,12 @@ class test_SortingAlgorithms(unittest.TestCase):
         self.assertEqual(self.sorted_array1,bubbleSort(self.input_array1))
         self.assertEqual(self.sorted_array2,bubbleSort(self.input_array2))
 
-        
+
 
     def tearDown(self) -> None:
         self.input_array = None
         self.sorted_array2 = None
+
 
 
 if __name__ == "__main__":

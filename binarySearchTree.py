@@ -128,6 +128,37 @@ def validateBSTHelper(tree,Min,Max,LeftOrRight):
         return validateBSTHelper(tree.left,Min, tree.value,"Left Tree") and validateBSTHelper(tree.right,tree.value,Max,"Right Tree")
 
     
+def findClosestValueInBst(tree, target):
+    # Move right
+
+
+    if tree.right and tree.left:
+        if target> tree.value or abs(target-tree.right.value)< abs(target-tree.left.value):
+            new_target = findClosestValueInBst(tree.right, target)
+        elif target< tree.value or abs(target-tree.left.value)< abs(target-tree.right.value):
+            new_target = findClosestValueInBst(tree.left, target)
+    elif (target < tree.value and tree.left is None) or (target> tree.value and tree.right is None):
+        new_target = tree.value
+    return new_target
+    
+
+
+    
+    
+
+        
+
+
+
+		
+
+
+# This is the class of the input tree. Do not edit.
+class BST_1:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
 
 # @classmethod
 def validateBST(tree):
@@ -149,7 +180,6 @@ if __name__ == "__main__":
     b1.insert(15)
     b1.insert(13)
     b1.insert(22)
-    b1.insert(12)
     b1.insert(14)
     b1.insert(2)
     b1.insert(1)
@@ -160,7 +190,7 @@ if __name__ == "__main__":
     # b1.remove(22)
     # self.assertFalse(b1.contains(22))
 
-
+    print(findClosestValueInBst(b1,12))
 #      10
 #     /    \
 #    5      15

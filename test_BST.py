@@ -1,9 +1,8 @@
-from types import NoneType
 import unittest
 from binarySearchTree import *
-import array as arr
-
 class test_BST(unittest.TestCase):
+
+            
     def setUp(self):
         self.InOrder_array = arr.array("i",[1, 2, 5, 5, 10, 13, 14, 15, 22]) #Integer arrray for inorder or ASCENDING order
         self.PreOrder_array = arr.array("i",[10,5,2,1,5,15,13,14,22]) #Integer arrray for preorder 
@@ -20,16 +19,10 @@ class test_BST(unittest.TestCase):
         self.root1.left.right = BST(5)
         self.root1.right = BST(15)
         self.root1.right.left = BST(13)
+    
         self.root1.right.left.right = BST(14)
         self.root1.right.right = BST(22)
-    #      root1 (follows BST variant)
-    #       10
-    #     /     \
-    #     5      15
-    #    / \     /  \
-    #   2   5  13   22
-    #  /        \  
-    # 1          14
+  
 
         # print(validateBST(root1))
     
@@ -44,17 +37,24 @@ class test_BST(unittest.TestCase):
         self.root2.right.left.right = BST(14)
         self.root2.right.right = BST(11)
 
-    #     self.root2 (doesn't follow BST invariant)
-    #       10
-    #     /     \
-    #     5      15
-    #    / \     /  \
-    #   2   5  13   11
-    #  /        \  
-    # 1          14
 
+        print("\n=======ROOT1============")
+        print("""          10         """)
+        print("""        /     \      """)
+        print("""       5      15     """)
+        print("""      / \     /  \   """)
+        print("""     2   5  13   11  """)
+        print("""    /        \       """)
+        print("""   1          14   \n""")
 
-
+        print("\n =======ROOT2============")
+        print("""          10         """)
+        print("""        /     \      """)
+        print("""       5      15     """)
+        print("""      / \     /  \   """)
+        print("""     2   5  13   11  """)
+        print("""    /      / \       """)
+        print("""   1      11   14  \n""")
 
 
     def tearDown(self):
@@ -75,7 +75,7 @@ class test_BST(unittest.TestCase):
 
     
     def test_InsertContains(self):
-   
+        print("\nTesting BST functions Contains,Insert and Remove")
         self.test_contains = self.root1.contains(10)
         self.assertTrue(self.test_contains)
         self.test_contains = self.root1.contains(50)
@@ -87,24 +87,35 @@ class test_BST(unittest.TestCase):
 
 
     def test_BSTValidate(self):
+        print(f"\n\nTesting BST Validation of {self.root1}")
         self.assertTrue(validateBST(self.root1)) #root1 follows BST invariant 
+        print(f"\nTesting BST Validation of {self.root2}")
 
         self.assertFalse(validateBST(self.root2)) #self.root2 doens't follow BST invariant
 
 
     def test_inOrderParse(self):
+        print(f"\nTesting InOrder Traverasal of above BST")
         inOrderTraverse(self.root1,self.InCheck_array)
         self.assertEqual(self.InCheck_array,self.InOrder_array)
 
     def test_preOrderParse(self):
+        print(f"\n\nTesting PreOrder Traverasal of above BST")
         preOrderTraverse(self.root1,self.PreCheck_array)
         self.assertEqual(self.PreCheck_array,self.PreOrder_array)
 
     def test_postOrderParse(self):
+        print(f"\n\nTesting PostOrder Traverasal of above BST")
         postOrderTraverse(self.root1,self.PostCheck_array)
         self.assertEqual(self.PostCheck_array,self.PostOrder_array)
 
-
+    def test_nearestValue(self):
+        print(f"\n\nTesting Nearest Value of {12} in the above BST")
+        self.assertEqual(13,findClosestValueInBst(self.root1,12))  
+        print(f"Testing Nearest Value of {24} in the above BST")
+        self.assertEqual(22,findClosestValueInBst(self.root1,24))  
+        print(f"Testing Nearest Value of {7} in the above BST")
+        self.assertEqual(5,findClosestValueInBst(self.root1,7))  
 
 if __name__ == "__main__":
     unittest.main()
