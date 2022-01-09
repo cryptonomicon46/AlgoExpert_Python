@@ -1,9 +1,8 @@
 import array as arr
 
 
-class BST():
-    nodeCount = 0 # Track size of the tree
 
+class BST():
     def __init__(self,value= None):
         self.value = value
         self.left = None
@@ -14,14 +13,14 @@ class BST():
         
         if value < self.value: #Go left until you hit a leaf with none
             if self.left == None:
-                self.nodeCount +=1
+                # self.nodeCount +=1
                 self.left = BST(value)
             else:
                 self.left.insert(value)
         elif value > self.value:
             if self.right == None:
                 self.right = BST(value)
-                self.nodeCount +=1
+                # self.nodeCount +=1
             else:
                 self.right.insert(value)
         return self
@@ -81,6 +80,30 @@ class BST():
                 self.right.contains(value)
         else:
             return True
+#Construct a BST with Min height from an inOrderArray as input
+
+def minHeightBst(array):
+    return minHeightHelperFunction(array,None)
+
+def minHeightHelperFunction(array,root):
+    if len(array)==0:
+        return
+    mid = len(array)//2
+    valueToAdd = array[mid]
+
+    if root is None:
+        root = BST(valueToAdd)
+    else:
+        root.insert(valueToAdd)
+
+    minHeightHelperFunction(array[0:mid],root)
+    minHeightHelperFunction(array[1+mid:],root)
+    return root
+    
+        
+
+
+
 
 
 
@@ -191,6 +214,11 @@ if __name__ == "__main__":
     # self.assertFalse(b1.contains(22))
 
     print(findClosestValueInBst(b1,12))
+
+    array = [1, 2, 5, 7, 10, 13, 14, 15, 22] #inOrder Traversal
+    bst_return = minHeightBst(array)
+    
+    print("\n")
 #      10
 #     /    \
 #    5      15

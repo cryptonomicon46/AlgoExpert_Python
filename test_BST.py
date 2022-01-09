@@ -10,6 +10,8 @@ class test_BST(unittest.TestCase):
         self.PreCheck_array = arr.array("i",[]) #Empty Array for checking
         self.PostCheck_array = arr.array("i",[]) #Empty Array for checking
         self.InCheck_array = arr.array("i",[]) #Empty Array for checking
+        self.MinHeightArrayAns = arr.array("i",[1, 2, 5, 7, 10, 13, 14, 15, 22]) #inOrder Traversal Input and answer
+        self.MinHeightArray  = arr.array("i",[])
 
         self.test_return = False
         self.root1 = BST(10)
@@ -116,6 +118,11 @@ class test_BST(unittest.TestCase):
         self.assertEqual(22,findClosestValueInBst(self.root1,24))  
         print(f"Testing Nearest Value of {7} in the above BST")
         self.assertEqual(5,findClosestValueInBst(self.root1,7))  
+
+    def test_minHeightArray(self):
+        self.bst_return = minHeightBst(self.MinHeightArrayAns)
+        inOrderTraverse(self.bst_return, self.MinHeightArray)
+        self.assertEqual(self.MinHeightArrayAns,self.MinHeightArray)
 
 if __name__ == "__main__":
     unittest.main()
