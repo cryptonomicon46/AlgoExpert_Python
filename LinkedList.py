@@ -42,15 +42,13 @@ class  Node():
     def __init__(self,name):
         self.name = name
         self.children = []
-    
-    def q_ret(self):
-        return self.q
-
 
     def addChild(self,name):
         self.children.append(Node(name))
         return self
     
+#Time Complexity: O(v + e)
+#Spare complexity: O(v)
     def depthFirstSearch(self, array):
         array.append(self.name)
         for child in self.children:
@@ -58,7 +56,8 @@ class  Node():
         # else:
         return array
             
-
+#Time Complexity: O(v+e)
+#Spare complexity: O(v)
     def breadthFirstSearch(self, array):
         currentNode =  self.name
         array.append(currentNode)
@@ -71,10 +70,7 @@ class  Node():
             # child_.breadthFirstSearch(array)
         return array
 
-    def breadthFirstSearchHelper(self,currentNode,array):
-        #Get CurrentNode's children
-        print("\n")
-        pass
+
 
     # def depthFirstSearchHelper(self,array):
 
