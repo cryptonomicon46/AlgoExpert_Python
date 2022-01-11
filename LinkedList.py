@@ -1,3 +1,5 @@
+from Queue import *
+
 class LinkedList():
     def __init__(self,value):
         self.value = value
@@ -35,10 +37,15 @@ def removeDuplicatesFromLinkedList(linkedList):
     return linkedList
 
 
-class  Node:
+class  Node():
+    q  = Queue()
     def __init__(self,name):
         self.name = name
         self.children = []
+    
+    def q_ret(self):
+        return self.q
+
 
     def addChild(self,name):
         self.children.append(Node(name))
@@ -52,6 +59,22 @@ class  Node:
         return array
             
 
+    def breadthFirstSearch(self, array):
+        currentNode =  self.name
+        array.append(currentNode)
+        for child in self.children:
+            self.q.enqueue(child)
+
+        while self.q.isEmpty() is not True:
+            child_ = self.q.dequeue()
+            child_.breadthFirstSearch(array)
+            # child_.breadthFirstSearch(array)
+        return array
+
+    def breadthFirstSearchHelper(self,currentNode,array):
+        #Get CurrentNode's children
+        print("\n")
+        pass
 
     # def depthFirstSearchHelper(self,array):
 
@@ -78,5 +101,11 @@ if __name__ == "__main__":
     graph.children[0].children[1].addChild("I").addChild("J")
     graph.children[2].children[0].addChild("K")
 
+
+# ['A', 'B', 'E', 'F', 'I', 'J', 'C', 'D', 'G', 'K', 'H']
     dfs_array = graph.depthFirstSearch([])
+
+#  ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
+
+    bfs_array = graph.breadthFirstSearch([])
     print("\n")
