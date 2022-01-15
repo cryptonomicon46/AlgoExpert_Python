@@ -1,5 +1,9 @@
+from binarySearchTrees import *
+
+
 import unittest
-from binarySearchTree import *
+import array as arr
+
 class test_BST(unittest.TestCase):
 
             
