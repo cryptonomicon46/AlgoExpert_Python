@@ -1,4 +1,5 @@
 from binarySearchTrees import *
+from binarySearch import binarySearch
 
 
 import unittest
@@ -28,7 +29,19 @@ class test_BST(unittest.TestCase):
     
         self.root1.right.left.right = BST(14)
         self.root1.right.right = BST(22)
-  
+
+        self.searchARR1 = [0, 1, 21, 33, 45, 45, 61, 71, 72, 73]
+        self.target1 = 33
+        self.searchRes1 = 3
+
+        self.target2 = 71
+        self.searchRes2 = 7
+
+        self.target3 = 0
+        self.searchRes3 = 0
+
+        self.target4 = 73
+        self.searchRes4 = 9
 
         # print(validateBST(root1))
     
@@ -128,5 +141,13 @@ class test_BST(unittest.TestCase):
         inOrderTraverse(self.bst_return, self.MinHeightArray)
         self.assertEqual(self.MinHeightArrayAns,self.MinHeightArray)
 
+
+    def test_binarySearch(self):
+        self.assertEqual(self.searchRes1,binarySearch(self.searchARR1,self.target1))
+        self.assertEqual(self.searchRes2,binarySearch(self.searchARR1,self.target2))
+        self.assertEqual(self.searchRes3,binarySearch(self.searchARR1,self.target3))
+        self.assertEqual(self.searchRes4,binarySearch(self.searchARR1,self.target4))
+  
+# `
 if __name__ == "__main__":
     unittest.main()

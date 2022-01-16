@@ -101,13 +101,11 @@ def minHeightHelperFunction(array,root):
     return root
     
 def maxTreeHeight(root):
-    if root is None:
-        return 0 
-    else:
-        h = max (maxTreeHeight(root.left),maxTreeHeight(root.right)) +1
-    return h
-
-
+    if root == None:
+        return -1
+    if root.left is None and root.right is None:
+        return 0
+    return  max(maxTreeHeight(root.left),maxTreeHeight(root.right)) +1
 
 
 
@@ -170,7 +168,6 @@ def findClosestValueInBst(tree, target):
     return new_target
     
 
-
     
     
 
@@ -203,43 +200,49 @@ def validateBST(tree):
 
 if __name__ == "__main__":
 
-    b2 = BST(10)
-    b2.insert(5)
-    b2.insert(15)
-    b2.insert(13)
-    b2.insert(22)
-    b2.insert(14)
-    b2.insert(2)
-    b2.insert(1)
+    b3 = BST(10)
+    b3.insert(5)
+    b3.insert(15)
+    b3.insert(13)
+    b3.insert(22)
+    b3.insert(14)
+    b3.insert(2)
+    b3.insert(1)
 
-    # self.assertTrue(b2.contains(1))
-    # self.assertTrue(b2.contains(14))
+    # self.assertTrue(b3.contains(1))
+    # self.assertTrue(b3.contains(14))
 
-    # b2.remove(22)
-    # self.assertFalse(b2.contains(22))
+    # b3.remove(22)
+    # self.assertFalse(b3.contains(22))
 
-    print(findClosestValueInBst(b2,12))
+    print(findClosestValueInBst(b3,12))
 
     array = [1, 2, 5, 7, 10, 13, 14, 15, 22] #inOrder Traversal
     bst_return = minHeightBst(array)
     
 
-    b2 = BST(10)
-    b2.insert(5)
-    b2.insert(15)
-    b2.insert(13)
-    b2.insert(22)
-    b2.insert(14)
-    b2.insert(2)
     array2 = []
-    inOrderTraverse(b2,array2)
+    inOrderTraverse(b3,array2)
     array2 = []
-    postOrderTraverse(b2,array2)
+    postOrderTraverse(b3,array2)
     array2 = []
-    preOrderTraverse(b2,array2)
+    preOrderTraverse(b3,array2)
 
-    height = maxTreeHeight(b2)
+ 
+
+
+    b3 = BST(10)
+    b3.insert(5)
+    b3.insert(15)
+    b3.insert(13)
+    b3.insert(22)
+    b3.insert(14)
+    b3.insert(2)    
+    maxHeight = maxTreeHeight(b3)
+
+
     print("\n")
+    
 #      10
 #     /    \
 #    5      15
