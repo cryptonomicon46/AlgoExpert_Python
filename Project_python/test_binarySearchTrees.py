@@ -43,6 +43,9 @@ class test_BST(unittest.TestCase):
         self.target4 = 73
         self.searchRes4 = 9
 
+        self.target5 = 100
+        self.searchRes5 = -1
+
         # print(validateBST(root1))
     
 
@@ -147,7 +150,8 @@ class test_BST(unittest.TestCase):
         self.assertEqual(self.searchRes2,binarySearch(self.searchARR1,self.target2))
         self.assertEqual(self.searchRes3,binarySearch(self.searchARR1,self.target3))
         self.assertEqual(self.searchRes4,binarySearch(self.searchARR1,self.target4))
-  
+        self.assertEqual(self.searchRes5,binarySearch(self.searchARR1,self.target5))
+
 # `
 if __name__ == "__main__":
     unittest.main()
