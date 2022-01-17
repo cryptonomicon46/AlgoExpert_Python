@@ -1,7 +1,4 @@
-from array import array
-
-
-class minHeap:
+class MinHeap:
     def __init__(self,array):
         self.heap = self.buildHeap(array)
 
@@ -74,7 +71,7 @@ if __name__ == "__main__":
     print(f"Initial Check of MinHeap Property:",isMinHeapPropertyTrue(array2))
 
     print("Building Min Heap....")
-    array2_return = minHeap(array2)
+    array2_return = MinHeap(array2)
     print("After:",array2,"\n",isMinHeapPropertyTrue(array2))
 
     insert = 76
