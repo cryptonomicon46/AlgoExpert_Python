@@ -1,5 +1,6 @@
 class MinHeap:
     def __init__(self,array):
+        self.vertexes = {id:id for id in range(len(array))}
         self.heap = self.buildHeap(array)
   
     # O(n) Time | O(1) space
@@ -14,11 +15,11 @@ class MinHeap:
         childOneIdx = 2*CurrentIdx+1
         while childOneIdx < EndIdx:
             childTwoIdx = -1 if 2* CurrentIdx+2 >= EndIdx else 2*CurrentIdx+2
-            if childTwoIdx != -1 and heap[childTwoIdx] < heap[childOneIdx]:
+            if childTwoIdx != -1 and heap[childTwoIdx][1] < heap[childOneIdx][1]:
                 IdxToSwap = childTwoIdx
             else:
                 IdxToSwap = childOneIdx
-            if  heap[CurrentIdx] > heap[IdxToSwap]:
+            if  heap[CurrentIdx][1] > heap[IdxToSwap][1]:
                 self.swap(CurrentIdx,IdxToSwap,heap)
                 CurrentIdx = IdxToSwap
                 childOneIdx = 2*CurrentIdx +1 
@@ -29,7 +30,7 @@ class MinHeap:
     # O(n) Time | O(1) space
     def siftUp(self,CurrentIdx,heap):
         ParentIdx = (CurrentIdx-1)//2
-        while CurrentIdx >0 and self.heap[CurrentIdx]< self.heap[ParentIdx]:
+        while CurrentIdx >0 and self.heap[CurrentIdx][1]< self.heap[ParentIdx][1]:
             self.swap(CurrentIdx,ParentIdx,self.heap)
             CurrentIdx = ParentIdx
             ParentIdx = (CurrentIdx-1)//2
@@ -44,9 +45,10 @@ class MinHeap:
 
     def remove(self):
         self.swap(0,len(self.heap)-1,self.heap)
-        itemRemoved = self.heap.pop()
+        vertex,itemRemoved = self.heap.pop()
+        self.vertexes.pop(vertex)
         self.siftDown(0,len(self.heap)-1,self.heap)
-        return itemRemoved
+        return vertex,itemRemoved
 
     def lenM1(self,array):
         return len(array)-1
@@ -57,9 +59,12 @@ class MinHeap:
         self.siftUp(len(self.heap)-1,self.heap)
     
     def update(self,Idx,item):
-        self.heap[Idx] = item
+        self.heap[self.vertexes[Idx]] = (Idx,item)
+        self.siftUp(self.vertexes[Idx],self.heap)
 
     def swap(self,i,j,heap):
+        self.vertexes[self.heap[i][0]]=j
+        self.vertexes[self.heap[j][0]] =i
         heap[j],heap[i]=  heap[i],heap[j]
         return heap[j],heap[i]
     

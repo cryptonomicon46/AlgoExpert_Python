@@ -154,9 +154,9 @@ def validateBSTHelper(tree,Min,Max,LeftOrRight):
         return validateBSTHelper(tree.left,Min, tree.value,"Left Tree") and validateBSTHelper(tree.right,tree.value,Max,"Right Tree")
 
     
+    #Time Comlexity:O(logN)
 def findClosestValueInBst(tree, target):
     # Move right
-
 
     if tree.right and tree.left:
         if target> tree.value or abs(target-tree.right.value)< abs(target-tree.left.value):
@@ -252,3 +252,6 @@ if __name__ == "__main__":
 # 1          14
 
 #Remove  =10
+
+
+
