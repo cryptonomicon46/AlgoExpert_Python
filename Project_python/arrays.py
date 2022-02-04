@@ -2,21 +2,59 @@
 #Return [number,otherNumber] if found else return [] empty array
 
 #O(n) time and Space?
+from hypothesis import target
+
+#x+y = targetSum
+#y = targetSum -x 
 def twoNumberSum(array,targetSum):
+    array.sort()
+    idx_L = 0
+    idx_R = len(array)-1
+    twoSumResult = []
+    while (idx_L < idx_R):
+        if array[idx_R] == targetSum - array[idx_L]:
+            return [array[idx_L], array[idx_R]]
+            idx_R -=1
+        elif  targetSum - array[idx_L] > array[idx_R]:
+            idx_L+=1
+        else:
+            idx_R-=1
+
+    return twoSumResult
+
+
+
+#threeNumberSum Function
+#Input: Non-empty array of integers , target sum.
+#Output: triplets that sum up to targetSum
+        # each sorted in ascending order, 
+        # whole triplet sorted in ascending order
+        # else return empty array 
+def twoNumberSum1(array,targetSum):
     arr_hash = {k:v for k,v in enumerate(array)}
     return_arr =[]
     for number in array:
-        return_arr.append(number)
         delta = targetSum- number
-        if delta in arr_hash.values() and delta != number:
-            return_arr.append(delta)
-            break
-        else:
-            return_arr.pop()
+        if delta in arr_hash.values() and delta < number:
+            return_arr.append([delta,number])
+
     return return_arr
+def threeNumberSum(array,targetSum):
+#    two_number_array = []
+    threeSum = []
+    counter = 1
+    array.sort()
+    for num in array:
+        targetSum1 = targetSum-num
+        return_twoSum = twoNumberSum1(array[counter:], targetSum1)
+        if return_twoSum:
+            for item in return_twoSum:
+                threeSum.append([num,item[0],item[1]])
+        counter+=1
+    threeSum.sort()
+    return threeSum if len(threeSum) else []
 
-
-
+#Check if 'sequence' is a subarray of 'array'
 #O(n) time and O(1) space
 def isValidSubsequence(array, sequence):
     # Write your code here.
@@ -40,8 +78,11 @@ def sortedSquaredArray(array):
     else:
         return []
 
+
+
     # competitions = [["HTML", "C#"], ["C#", "Python"], ["Python", "HTML"]]
     # results = [0, 0, 1]
+    # winner = 'Python'
 
 def tournamentWinner(competitions, results):
     # Write your code here.
@@ -74,24 +115,8 @@ def updateScoring(team1, team2,dict_scores):
         dict_scores[team2] =0
     return dict_scores
 
-import functools
-from venv import create
 
-def nonConstructibleChange_fails(coins):
-    # Write your code here
-    if len(coins) <=1:
-        return 1
-    coins.sort() #Sort in ascending order
-    coinsSum = functools.reduce(lambda a,b : a+b,coins[:-1])
-
-    if coinsSum+1 < coins[-1]:
-        return coinsSum+1
-    elif coins[0]== coins[-1]:
-        return coins[0]+1
-    else:
-        return coinsSum+ coins[-1] +1
- 
-
+ #nlog(n) Time from coins.sort() | O(1) space
 def nonConstructibleChange(coins):
     createChange = 0
     coins.sort()
@@ -121,37 +146,51 @@ def QuadrapuleSum(array,targetSum):
 
 
 if __name__ == "__main__":
+
+
+    #Two Number Sum
+    #Find 'y' such that y = 10-x
     array = [3, 5, -4, 8, 11, 1, -1, 6] #x
     targetSum = 10 
-    #Result = [11,-1]
-    #Find 'y' such that y = 10-x
-
-
+    #Result = [11,11]
 
     print(twoNumberSum(array,targetSum))
+    
 
 
+    #Valid Sub Sequence 
     array1 = [5, 1, 22, 25, 6, -1, 8, 10]
     sequence = [1, 6, -1, 10]
     print(isValidSubsequence(array1,sequence))
 
 
+    #Sorted Squared Array
     input = [1, 2, 3, 5, 6, 8, 9]
     expected = [1, 4, 9, 25, 36, 64, 81]
     print(sortedSquaredArray([-5, -4, -3, -2, -1]))
     print(sortedSquaredArray([-10, -5, 0, 5, 10]))
 
+    #Tournement Winner
     competitions = [["HTML", "C#"], ["C#", "Python"], ["Python", "HTML"]]
     results = [0, 0, 1]
-
-    tournamentWinner(competitions, results)
+    print(tournamentWinner(competitions, results))
   
 
+
+    #Non Constructible Change
     coins = [5, 7, 1, 1, 2, 3, 22]
     print(nonConstructibleChange(coins)) #20
     print(nonConstructibleChange([1, 5, 1, 1, 1, 10, 15, 20, 100])) #55
     print(nonConstructibleChange([87])) #1 
     print(nonConstructibleChange([5, 6, 1, 1, 2, 3, 4, 9])) #32
     print(nonConstructibleChange([1,1,1,1,1])) #6
+
+
+    #ThreeSum test 
+    numbers = [12, 3, 1, 2, -6, 5, -8, 6]
+    targetSum= 0 
+    results = [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]]
+    print(threeNumberSum(numbers,targetSum))
+
 
     print("\n")

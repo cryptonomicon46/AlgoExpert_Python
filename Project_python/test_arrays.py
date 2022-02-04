@@ -18,10 +18,10 @@ class test_arrays(unittest.TestCase):
 
 
     def test_twoNumberSum(self):
-        self.assertEqual(self.result1,twoNumberSum(self.array1,self.targetSum1))
+        self.assertEqual([-1,11],twoNumberSum(self.array1,self.targetSum1))
         self.assertEqual([4,6],twoNumberSum([4,6],10))
-        self.assertEqual([4,1],twoNumberSum([4,6,1],5))
-        self.assertEqual([6,-3],twoNumberSum([4,6,1,-3],3))
+        self.assertEqual([1,4],twoNumberSum([4,6,1],5))
+        self.assertEqual([-3,6],twoNumberSum([4,6,1,-3],3))
         self.assertEqual([8,9],twoNumberSum([1,2,3,4,5,6,7,8,9],17))
         self.assertEqual([3,15],twoNumberSum([1,2,3,4,5,6,7,8,9,15],18))
         self.assertEqual([-5,0],twoNumberSum([-7, -5, -3, -1, 0, 1, 3, 5, 7],-5))
@@ -36,14 +36,18 @@ class test_arrays(unittest.TestCase):
         self.assertEqual(1,nonConstructibleChange([87]))
         self.assertEqual(32,nonConstructibleChange([5, 6, 1, 1, 2, 3, 4, 9]))
         self.assertEqual(6,nonConstructibleChange([1,1,1,1,1])) #6
+    
+    def test_tournament(self):
+        self.competitions1 = [["HTML", "C#"], ["C#", "Python"], ["Python", "HTML"]]
+        self.results1 = [0, 0, 1]
+        self.assertEqual('Python',tournamentWinner([["HTML", "C#"], ["C#", "Python"], ["Python", "HTML"]],[0, 0, 1])) 
+
+
+    # def test_threeNumberSum(self):
+    #     pass
 
 
 
-
-
-
-
-        
 
 
 if __name__ == "__main__":
