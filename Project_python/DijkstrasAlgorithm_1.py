@@ -26,12 +26,6 @@ def dijkstrasAlgorithm(start,edges):
 
 
 
-
-
-
-
-    return list(map(lambda x: -1 if float('inf') else x, distances))
-
 def VertexAndCurrMinDistance(distances,visited):
     vertex = None
     currMinDistance = float('inf')

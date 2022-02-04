@@ -75,3 +75,64 @@ function result(){
 
 
 }
+
+
+
+
+
+//Weather Selection
+
+const select = document.querySelector('select');
+// const para_weather = document.querySelector('.para_weather');
+const para_weather = document.querySelector(".story");
+
+select.addEventListener('change',set_weather);
+
+function set_weather() {
+    console.log(select.value);
+    if (select.value === 'sunny') {
+    para_weather.textContent = "It'll be sunny today, time to hit the beach";}
+    else if (select.value ==='rainy'){
+        para_weather.textContent = "Don't forget your umbrella";
+    }
+    else if (select.value ==='snowing'){
+        para_weather.textContent = "Make sure to pack your snow chains!";
+    }
+    else if (select.value ==='overcast'){
+        para_weather.textContent = "It'll be a gloomy day folks!";
+    }
+    else {
+        para_weather.textContent="";
+    }
+
+    para_weather.style.visibility ='visible';
+//     let caseValue = select.value;
+
+
+// console.log(caseValue==='sunny');
+
+    switch(caseValue) {
+        case caseValue === "sunny":
+            story.textContent = "It'll be sunny today, time to hit the beach";
+            story.style.visibility = 'visible';
+
+            console.log(story.textContent);
+        case caseValue === "rainy":
+            story.textContent = "Carry your umbrella";
+        case caseValue === "snowing":
+            story.textContent = "It'll snow today, stay home!";
+        case caseValue === "overcast":
+            story.textContent = "Today will be a gloomy day";
+
+
+    }
+
+}
+
+
+
+
+
+
+
+

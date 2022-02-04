@@ -55,9 +55,7 @@ class MinHeap:
     def insert(self,item):
         self.heap.append(item)
         self.siftUp(len(self.heap)-1,self.heap)
-    
-    def update(self,Idx,item):
-        self.heap[Idx] = item
+
 
     def swap(self,i,j,heap):
         heap[j],heap[i]=  heap[i],heap[j]
