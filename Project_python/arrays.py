@@ -191,6 +191,37 @@ def smallestDifference(arrayOne, arrayTwo):
     # ~= {N*log(N) + M*log(M)}  
     
 
+#Move all instances of 'toMove' in 'array' to the end of the array , mutate in place 
+#O(n) Time | O(1) Space
+def moveElementToEnd1(array, toMove):
+    # Write your code here.
+    idx = 0
+    loopCounter = 0 
+    while (loopCounter < len(array)):
+        numToCheck = array[idx]
+        if numToCheck == toMove:
+            itemPopped = array.pop(idx)
+            array.append(itemPopped)
+            idx=0
+        loopCounter +=1
+        idx=1
+
+    return array
+
+
+
+def moveElementToEnd(array, toMove):
+    # Write your code here.
+    idx_L = 0
+    idx_R = len(array)-1
+    while (idx_L < idx_R):
+        while (idx_L< idx_R and array[idx_R] == toMove):
+            idx_R-=1
+        if array[idx_L] == toMove:
+            array[idx_L],array[idx_R] = array[idx_R], array[idx_L]
+        idx_L+=1
+
+    return array
 
 
 
@@ -249,4 +280,10 @@ if __name__ == "__main__":
     arrayTwo = [26, 134, 135, 15, 17]
     #smallestDiff = [28,26] #Answer
     print(smallestDifference(arrayOne,arrayTwo))
+
+
+    #Move Elements to the end 
+    array = [2, 1, 2, 2, 2, 3, 4, 2]
+    toMove = 2
+    print(moveElementToEnd(array,toMove))
     print("\n")
