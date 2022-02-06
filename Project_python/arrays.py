@@ -1,26 +1,27 @@
 #For each number in the array, check if another number other than itself adds up to targetSum
 #Return [number,otherNumber] if found else return [] empty array
 
-#O(n) time and Space?
-from hypothesis import target
+#O(nlon) time |  O(1) space
+
 
 #x+y = targetSum
 #y = targetSum -x 
+
+#O(nlogn) time || O(n) space
 def twoNumberSum(array,targetSum):
-    array.sort()
+    array.sort()  #log(n) time
     idx_L = 0
     idx_R = len(array)-1
     twoSumResult = []
-    while (idx_L < idx_R):
+    while (idx_L < idx_R): #n time 
         if array[idx_R] == targetSum - array[idx_L]:
             return [array[idx_L], array[idx_R]]
-            idx_R -=1
         elif  targetSum - array[idx_L] > array[idx_R]:
             idx_L+=1
         else:
             idx_R-=1
 
-    return twoSumResult
+    return twoSumResult #nlog(n) time
 
 
 
@@ -30,29 +31,37 @@ def twoNumberSum(array,targetSum):
         # each sorted in ascending order, 
         # whole triplet sorted in ascending order
         # else return empty array 
-def twoNumberSum1(array,targetSum):
-    arr_hash = {k:v for k,v in enumerate(array)}
-    return_arr =[]
-    for number in array:
-        delta = targetSum- number
-        if delta in arr_hash.values() and delta < number:
-            return_arr.append([delta,number])
 
-    return return_arr
-def threeNumberSum(array,targetSum):
-#    two_number_array = []
-    threeSum = []
-    counter = 1
+# O(n*n) time || O(n) space
+def threeNumberSum(array,threeSum):
+    threeSumArray = []
     array.sort()
-    for num in array:
-        targetSum1 = targetSum-num
-        return_twoSum = twoNumberSum1(array[counter:], targetSum1)
-        if return_twoSum:
-            for item in return_twoSum:
-                threeSum.append([num,item[0],item[1]])
-        counter+=1
-    threeSum.sort()
-    return threeSum if len(threeSum) else []
+    for i in range(len(array)-2):
+        idx_L = i+1
+        idx_R = len(array)-1
+
+        while(idx_L < idx_R):
+            left = array[idx_L]
+            num = array[i]
+            right = array[idx_R]
+       
+            sumOfThree = num + left + right 
+            if sumOfThree > threeSum:
+                idx_R-=1
+                # right = array[idx_R]
+            elif sumOfThree < threeSum:
+                idx_L+=1
+                # left = array[idx_L]
+            else:
+                threeSumArray.append([num,array[idx_L],array[idx_R]])
+                idx_L+=1
+                idx_R-=1
+        
+    return threeSumArray
+
+
+
+
 
 #Check if 'sequence' is a subarray of 'array'
 #O(n) time and O(1) space
@@ -130,19 +139,61 @@ def nonConstructibleChange(coins):
     return createChange+1 
 
     
+#Find a pair of numbers one from each array with absolute difference closest to 0
+#O(N*M + log(N) + log(M)) time || O(1) space
+#Using nested For loops
+def smallestDifferenceFor(arrayOne, arrayTwo):
+    # Write your code here.
+    arrayOne.sort() # log(N) time
+    arrayTwo.sort() #log(M) time
+    delta = float('inf')
+    smallestDiff = []
+    for numOne in arrayOne: #Time N 
+        for numTwo in arrayTwo:  #Time M 
+            # delta = abs(numOne- numTwo)
+            if numTwo-numOne == 0:  
+                return [numOne,numTwo]
+            elif delta > abs(numOne- numTwo):
+                delta = abs(numTwo- numOne)
+                smallestDiff = [numOne,numTwo]
+    return smallestDiff
 
 
+#Using While loop
+def smallestDifference(arrayOne, arrayTwo):
+    # Write your code here.
+    arrayOne.sort() # Nlog(N) quick sort time
+    arrayTwo.sort() #Mlog(M) quick sort time
+    currentDelta = float('inf')
+    smallestDelta = float('inf')
+    smallestDiff = []
+    idx_One = 0
+    idx_Two = 0
+    #Time N+M 
+    while (idx_One <len(arrayOne)) and (idx_Two < len(arrayTwo)):
+        numOne = arrayOne[idx_One]
+        numTwo = arrayTwo[idx_Two]
+    
+        if numOne < numTwo:
+            currentDelta = numTwo- numOne
+            idx_One+=1
+        elif numTwo < numOne:
+            currentDelta = numOne - numTwo
+            idx_Two+=1
+        else:
+            return [numOne, numTwo]
+        if smallestDelta >= currentDelta:
+            smallestDelta = currentDelta
+            smallestDiff = [numOne, numTwo]
 
+    return smallestDiff
+    #Total Time = {N*log(N) + M*log(M) + M+N} 
+    # ~= {N*log(N) + M*log(M)}  
     
 
 
 
 
-def TripletSum(array,targetSum):
-    pass
-
-def QuadrapuleSum(array,targetSum):
-    pass
 
 
 if __name__ == "__main__":
@@ -193,4 +244,9 @@ if __name__ == "__main__":
     print(threeNumberSum(numbers,targetSum))
 
 
+    #Smallest difference
+    arrayOne = [-1, 5, 10, 20, 28, 3]
+    arrayTwo = [26, 134, 135, 15, 17]
+    #smallestDiff = [28,26] #Answer
+    print(smallestDifference(arrayOne,arrayTwo))
     print("\n")

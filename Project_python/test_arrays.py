@@ -43,8 +43,8 @@ class test_arrays(unittest.TestCase):
         self.assertEqual('Python',tournamentWinner([["HTML", "C#"], ["C#", "Python"], ["Python", "HTML"]],[0, 0, 1])) 
 
 
-    # def test_threeNumberSum(self):
-    #     pass
+    def test_threeNumberSum(self):
+        pass
 
 
 
