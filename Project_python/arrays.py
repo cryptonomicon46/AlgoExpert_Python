@@ -8,6 +8,12 @@
 #y = targetSum -x 
 
 #O(nlogn) time || O(n) space
+from audioop import reverse
+from curses import start_color
+from tkinter import S
+from turtle import right
+
+
 def twoNumberSum(array,targetSum):
     array.sort()  #log(n) time
     idx_L = 0
@@ -224,7 +230,108 @@ def moveElementToEnd(array, toMove):
     return array
 
 
+#Check if array is monotonic, non-increasing or Monotonic non-decreasing
+# O(n) time || O(1) space 
+def isMonotonic1(array):
+    # Write your code here.
+    idx_L = 0
+    idx_R = len(array)-1
+    delta = 0 
+    if len(array)<=1:
+        return True
+    
+    if array[idx_L] > array[idx_R]:
+        while (idx_L < idx_R):
+            delta = array[idx_L]- array[idx_L+1]
+            if delta <0:
+                return False
+            idx_L+=1
+    else:
+        while (idx_L < idx_R):
+            delta = array[idx_L+1]- array[idx_L]
+            if delta <0:
+                return False
+            idx_L+=1
 
+    return True
+
+
+def isMonotonic(array):
+    nonDecreasing = True
+    nonIncreasing = True
+
+    for i in range(1,len(array)):
+        if array[i]> array[i-1]:
+            nonDecreasing = False
+        if array[i] < array[i-1]:
+            nonIncreasing = False
+    return nonDecreasing or nonIncreasing
+
+
+def spiralTraverse(array):
+    # Write your code here.
+    SpiralArray =[]
+    startRow,endRow = 0,len(array)-1
+    startCol, endCol = 0, len(array[0])-1
+   
+    while startRow<= endRow and startCol <= endCol:
+        
+        for col in range(startCol,endCol+1):
+            SpiralArray.append(array[startRow][col])
+
+        for row in range(startRow+1, endRow+1):
+            SpiralArray.append(array[row][endCol])
+        
+        for col in reversed(range(startCol,endCol)):
+            if startRow== endRow:
+                break
+            SpiralArray.append(array[endRow][col])
+
+        for row in reversed(range(startRow+1,endRow)):
+            if startCol== endCol:
+                break
+            SpiralArray.append(array[row][startCol])
+
+        startRow+=1
+        endRow-=1
+        startCol+=1
+        endCol-=1
+
+    return SpiralArray
+
+    
+
+def longestPeak(array):
+    # Write your code here.
+    longestPeakCount = 0 
+    currentLongestPeak = 0 
+    i = 0 
+
+
+    while i < len(array):
+
+       
+        if not (array[i]>array[i-1] and array[i]>array[i+1]):
+            i+=1
+            continue
+        else:
+            leftIdx = i-2
+            while (leftIdx >=0 and array[leftIdx]<array[leftIdx+1]):
+                leftIdx-=1
+            rightIdx = i+2
+            while (rightIdx< len(array) and array[rightIdx]<array[rightIdx-1]):
+                rightIdx+=1
+            currentLongestPeak = rightIdx-leftIdx-1
+            longestPeakCount = max(longestPeakCount,currentLongestPeak)
+
+            i=rightIdx
+
+    return longestPeakCount
+
+
+      def arrayOfProducts(array):
+            # Write your code here.
+    pass
 
 
 if __name__ == "__main__":
@@ -286,4 +393,40 @@ if __name__ == "__main__":
     array = [2, 1, 2, 2, 2, 3, 4, 2]
     toMove = 2
     print(moveElementToEnd(array,toMove))
+
+
+    #Is Monotonic Array
+    array = [-1, -5, -10, -1100, -1100, -1101, -1102, -9001]
+    array2= [1]
+    array3 = [1, 5, 10, 1100, 1101, 1102, 9001]
+    array4 = [1, 2, 0] #Fail
+    array5 = [1, 1, 1, 2, 3, 4, 1] #Fail
+    array6 = [-1, -5, 10]
+    print(isMonotonic(array6))
+
+
+    #Spiral Traverse
+
+    matrix = [[1, 2, 3, 4], [12, 13, 14, 5], [11, 16, 15, 6], [10, 9, 8, 7]]
+    matrix1= [
+    [1, 2, 3, 4],
+    [12, 13, 14, 5],
+    [11, 16, 15, 6],
+    [10, 9, 8, 7]
+    ]
+    matrix2= [
+    [1, 2, 3],
+    [8, 9, 4],
+    [7, 6, 5]
+  ]
+    print(spiralTraverse(matrix2))
+
+    #Longest Peak
+
+    array =  [1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]
+    array2 = [5, 4, 3, 2, 1, 2, 10, 12, -3, 5, 6, 7, 10]
+    array3 = [1, 2, 3, 4, 5, 1]
+    print(longestPeak(array3))
     print("\n")
+
+
